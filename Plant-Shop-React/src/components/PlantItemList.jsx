@@ -1,27 +1,45 @@
+import { useState } from "react";
+
+const plants = {
+  Flower: ['sunflower', 'rose'],
+  Fruit: ['melon', 'blueberries']
+};
+
+
 export function ItemPlants() {
+
+  const availableQuantity = 10;
+
+  const [quantity, setQuantity] = useState(0);
+
+  const handleQuantityChange = (e) => {
+    const inputValue = parseInt(e.target.value, 10);
+    // Update quantity only if it's <= available quantity
+    if (inputValue <= availableQuantity) {
+      setQuantity(inputValue);
+    }
+  };
+
     return (
       <div className="itemContainer">
-        <h1 className="itemName">Leaf</h1>
+        <h1 className="itemName">
+        {plants.Flower[1]}
+        </h1>
         <div className="itemImgContainer">
             <img src="https://png.pngtree.com/png-vector/20240312/ourmid/pngtree-green-leaf-for-element-png-image_11934356.png" alt="" className="itemImg"/>
-        </div>
-        <p className=""></p>
-        <label for="numberDropdown">quantity: </label>
-        <select>
-        <option value="0"></option>
-        <option value="1">1</option>
-        <option value="1">1</option>
-        <option value="2">2</option>
-        <option value="3">3</option>
-        <option value="4">4</option>
-        <option value="5">5</option>
-        <option value="6">6</option>
-        <option value="7">7</option>
-        <option value="8">8</option>
-        <option value="9">9</option>
-        <option value="10">10</option>
-        </select>
-      </div>
+            </div>
+
+<label htmlFor="quantityInput">Quantity:</label>
+<input
+  type="number"
+  id="quantityInput"
+  value={quantity}
+  onChange={handleQuantityChange}
+  min="0"
+  max={availableQuantity}
+/>
+<p>Available: {availableQuantity}</p>
+</div>
     );
   }
   
